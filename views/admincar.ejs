@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Books</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/admin.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.0.2/dist/minty/bootstrap.min.css" crossorigin="anonymous">
+</head>
+
+<body class="admin">
+<header class="bg-danger text-white py-2">
+    <div class="container d-flex justify-content-between align-items-center">
+        <a href="/" class="btn btn-outline-light"><i class='bx bx-log-out'></i> Logout</a>
+        <a href="/admin" class="btn btn-outline-light"><i class='bx bxs-user'></i> Users</a>
+        <a href="/admincar" class="btn btn-outline-light"><i class='bx bxs-book'></i> Books</a>
+        <a href="/order" class="btn btn-outline-light"><i class='bx bxs-basket'></i> Orders</a>
+    </div>
+</header>
+
+    <main class="table mt-5" id="customers_table">
+
+        <section class="table__header">
+            <h1>Books</h1>
+
+            <button class="btn btn-primary" id="addcarButton" data-toggle="modal" data-target="#addcarModal">Add book</button>
+        </section>
+        <section class="table__body">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th> Img </th>
+                        <th> Author</th>
+                        <th> Genre </th>
+                        <th> Year</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <% cars.forEach(car => { %>
+                        <tr>
+                            <td><img src='/carimg/<%=car.img%>' alt=""></td>
+                            <td><%= car.Make %></td>
+                            <td><%= car.Model %></td>
+                            <td><%= car.Year %></td>
+
+                            <td>
+                                <button class="btn btn-primary edit-car" data-toggle="modal" data-target="#editModal<%= car._id %>">Edit</button>
+                                <a href="/admin/delete/car/<%= car._id %>" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                        <div class="modal fade" id="editModal<%= car._id %>" tabindex="-1" role="dialog" aria-labelledby="editModalLabel<%= car._id %>" aria-hidden="true">
+
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editModalLabel<%= car._id %>">Edit car </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="/admin/edit/car/<%= car._id %>" method="POST" enctype="multipart/form-data">
+                                            <div class="form-group">
+                                                <label for="carimg1">Img 1</label>
+                                                <input type="file" name="photo" id="photoInput1" placeholder="Title photo" accept="image/*">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="carimg2">Img 2</label>
+                                                <input type="file" name="photo" id="photoInput2" placeholder="Title photo" accept="image/*">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="carimg3">Img 3</label>
+                                                <input type="file" name="photo" id="photoInput3" placeholder="Title photo" accept="image/*">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="car_make">Make</label>
+                                                <input type="text" class="form-control" id="car_make" name="car_make" value="<%= car.Make %>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="car_model">Model</label>
+                                                <input type="text" class="form-control" id="car_model" name="car_model" value="<%= car.Model %>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="carmodel">Year</label>
+                                                <input type="text" class="form-control"  name="year" value="<%= car.Year %>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="configuration">Configuration</label>
+                                                <input type="text" class="form-control"  name="configuration" value="<%= car.configuration %>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="Cost">Cost</label>
+                                                <input type="text" class="form-control"  name="Cost" value="<%= car.configuration %>" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="carmodel">Description</label>
+                                                <input type="text" class="form-control"  name="description_en" value="<%= car.description_in_en %>">
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% }); %>
+                </tbody>
+            </table>
+
+            <div class="modal fade" id="addcarModal" tabindex="-1" role="dialog" aria-labelledby="addcarModalLabel" aria-hidden="true" data-backdrop="false">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addcarModalLabel">Add book</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/admin/add/car" method="POST" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label for="carmake">Img 1</label>
+                                    <input type="file" name="photo" id="photo" placeholder="Title photo" accept="image/*">
+                                </div>
+                                <div class="form-group">
+                                    <label for="carmake">Img 2 </label>
+                                    <input type="file" name="photo" id="photo" placeholder="Photo 2 in Book Page" accept="image/*">
+                                </div>
+                                <div class="form-group">
+                                    <label for="carmake">Img 3 </label>
+                                    <input type="file" name="photo" id="photo" placeholder="Photo 3 in Book Page" accept="image/*">
+                                </div>
+                                <div class="form-group">
+                                    <label for="carmake">Author</label>
+                                    <input type="text" class="form-control"  name="make" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="carmodel">Genre</label>
+                                    <input type="text" class="form-control"  name="model" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="carmodel">Year</label>
+                                    <input type="text" class="form-control"  name="year" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="configuration">Copies</label>
+                                    <input type="text" class="form-control"  name="configuration" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Cost">Cost</label>
+                                    <input type="text" class="form-control"  name="Cost" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="carmodel">Description:</label>
+                                    <input type="text" class="form-control"  name="description_en" required>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary mt-2">Add book</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="/javascripts/admin.js"></script>
+    <script src="/javascripts/search.js"></script>
+
+</body>
+
+</html>

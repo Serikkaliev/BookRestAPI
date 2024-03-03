@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <title>Sign in & Sign up Form</title>
+  </head>
+  <body id="sign_in_body">
+    <div class="container">
+      <div class="forms-container">
+        <div class="signin-signup">
+          <form action="/signin" method="post" class="sign-in-form">
+            <h2 class="title">Sign in</h2>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="Username" name="sign_in_username" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Password" name="sign_in_password" />
+            </div>
+            <input type="submit" value="Login" class="btn solid" />
+
+          </form>
+          <form action="/signup" method="post" class="sign-up-form">
+            <h2 class="title">Sign up</h2>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="Username" name="sign_up_username" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-envelope"></i>
+              <input type="password" placeholder="Password" name="sign_up_password" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Re-Enter Password" name="sign_up_password2"/>
+            </div>
+            <input type="submit" class="btn" value="Sign up" />
+          </form>
+        </div>
+      </div>
+
+
+      </div>
+    </div>
+
+    <script src="/javascripts/login.js"></script>
+  </body>
+</html>

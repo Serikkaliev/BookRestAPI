@@ -1,0 +1,121 @@
+/* Reset some basic elements */
+body, h2, form {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f2f5;
+}
+
+.container {
+  position: relative;
+  width: 900px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25),
+  0 10px 10px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+
+.forms-container {
+  width: 80%;
+  padding: 50px;
+}
+
+.signin-signup {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.input-field {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.input-field i {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  color: #999;
+  transition: color 0.4s;
+}
+
+.input-field input {
+  width: 100%;
+  padding: 15px 20px 15px 45px;
+  border-radius: 25px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  color: #333;
+}
+
+.input-field input:focus {
+  border-color: #007bff;
+}
+
+.input-field input:focus + i {
+  color: #007bff;
+}
+
+.btn {
+  width: 100%;
+  background: #007bff;
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background 0.4s;
+}
+
+.btn:hover {
+  background: #0056b3;
+}
+
+.btn.solid {
+  background: #5cb85c;
+}
+
+.btn.solid:hover {
+  background: #4cae4c;
+}
+
+/* Adjustments for small screens */
+@media screen and (max-width: 900px) {
+  .container {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .signin-signup {
+    flex-direction: column;
+  }
+
+  .forms-container {
+    padding: 20px;
+  }
+}
